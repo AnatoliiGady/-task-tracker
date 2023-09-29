@@ -1,4 +1,6 @@
-package org.example;
+package org.example.task;
+
+import org.example.status.Status;
 
 public abstract class AbstractTask {
     private final int id;

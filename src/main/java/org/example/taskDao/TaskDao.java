@@ -1,4 +1,8 @@
-package org.example;
+package org.example.taskDao;
+
+import org.example.task.Epic;
+import org.example.task.SubTask;
+import org.example.task.Task;
 
 public interface TaskDao {
     int add(Task task);
@@ -19,9 +23,9 @@ public interface TaskDao {
 
     SubTask getSubTaskById(int id);
 
-    int update(Task task);
+    void update(Task task);
 
-    int update(Epic epic);
+    void update(Epic epic);
 
-    int update(SubTask subTask);
+    void update(SubTask subTask);
 }
