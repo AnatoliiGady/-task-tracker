@@ -2,10 +2,9 @@ package org.example.task;
 
 public class SubTask extends AbstractTask {
 
-    private final Integer epicId;
+    private Integer epicId;
 
-    public SubTask(int id, Integer epicId) {
-        super(id);
+    public void setEpicId(Integer epicId) {
         this.epicId = epicId;
     }
 

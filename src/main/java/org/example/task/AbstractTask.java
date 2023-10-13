@@ -3,18 +3,17 @@ package org.example.task;
 import org.example.status.Status;
 
 public abstract class AbstractTask {
-    private final int id;
+    private Integer id;
     private String title;
     private String description;
     private Status status;
 
-    public AbstractTask(int id) {
-        this.id = id;
-        this.status = Status.NEW;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -2,11 +2,7 @@ package org.example.task;
 
 public class Task extends AbstractTask {
 
-    public Task(int id) {
-        super(id);
-    }
-
-    @Override
+     @Override
     public String toString() {
         return "Task{"
                 + "id=" + getId()
