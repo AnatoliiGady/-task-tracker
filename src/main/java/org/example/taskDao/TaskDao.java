@@ -11,11 +11,11 @@ public interface TaskDao {
 
     int add(SubTask subTask);
 
-    boolean removeTaskById(Task id);
+    boolean removeTaskById(int id);
 
-    boolean removeEpicById(Epic id);
+    boolean removeEpicById(int id);
 
-    boolean removeSubTaskById(SubTask id);
+    boolean removeSubTaskById(int id);
 
     Task getTaskById(int id);
 
