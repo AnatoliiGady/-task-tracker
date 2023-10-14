@@ -1,5 +1,6 @@
 package org.example.taskDao;
 
+import org.example.status.Status;
 import org.example.task.Epic;
 import org.example.task.SubTask;
 import org.example.task.Task;
@@ -28,4 +29,6 @@ public interface TaskDao {
     void update(Epic epic);
 
     void update(SubTask subTask);
+
+    Status getEpicStatusById(int id);
 }

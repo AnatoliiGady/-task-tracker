@@ -18,19 +18,25 @@ public class InMemoryTaskDao implements TaskDao {
 
     @Override
     public int add(Task task) {
-        tasks.put(idGeneratorTask++, task);
+        tasks.put(idGeneratorTask, task);
+        task.setId(idGeneratorTask);
+        idGeneratorTask++;
         return task.getId();
     }
 
     @Override
     public int add(Epic epic) {
-        epics.put(idGeneratorEpic++, epic);
+        epics.put(idGeneratorEpic, epic);
+        epic.setId(idGeneratorEpic);
+        idGeneratorEpic++;
         return epic.getId();
     }
 
     @Override
     public int add(SubTask subTask) {
         subTasks.put(idGeneratorSubTask++, subTask);
+        subTask.setId(idGeneratorSubTask);
+        idGeneratorSubTask++;
         return subTask.getId();
     }
 
