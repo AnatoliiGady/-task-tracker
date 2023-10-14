@@ -9,6 +9,8 @@ import org.example.taskDao.TaskDao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ManagerImpl implements Manager {
 
@@ -82,6 +84,24 @@ public class ManagerImpl implements Manager {
         taskDao.update(subTask);
     }
 
+    public Status getEpicStatusByIdV2(int id) {
+        Map<Status, Long> res = getEpicById(id).getIdSubTasks().stream()
+                .map(taskDao::getSubTaskById)
+                .map(SubTask::getStatus)
+                .collect(Collectors.groupingBy(status -> status, Collectors.counting()));
+
+        int countOfStatuses = res.values().stream().mapToInt(Long::intValue).sum();
+
+        if (res.get(Status.IN_PROGRESS) > 0) {
+            return Status.IN_PROGRESS;
+        } else if (res.get(Status.DONE) == countOfStatuses) {
+            return Status.DONE;
+        } else {
+            return Status.NEW;
+        }
+    }
+
+
     @Override
     public Status getEpicStatusById(int id) {
         Epic epicById = taskDao.getEpicById(id);
@@ -96,18 +116,15 @@ public class ManagerImpl implements Manager {
         for (SubTask subTask : subTasks) {
             if (subTask.getStatus() == Status.IN_PROGRESS) {
                 countInProgress++;
-            }
-            if (subTask.getStatus() == Status.DONE) {
+            } else if (subTask.getStatus() == Status.DONE) {
                 countDone++;
-            }
-            if (subTask.getStatus() == Status.NEW) {
+            } else if (subTask.getStatus() == Status.NEW) {
                 countNew++;
             }
         }
         if (countInProgress > 0) {
             return Status.IN_PROGRESS;
-        }
-        if (countDone == idSubTasks.size()) {
+        } else if (countDone == idSubTasks.size()) {
             return Status.DONE;
         } else {
             return Status.NEW;
