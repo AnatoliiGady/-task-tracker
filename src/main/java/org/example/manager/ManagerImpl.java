@@ -92,7 +92,7 @@ public class ManagerImpl implements Manager {
 
         int countOfStatuses = res.values().stream().mapToInt(Long::intValue).sum();
 
-        if (res.get(Status.IN_PROGRESS) > 0) {
+        if (res.getOrDefault(Status.IN_PROGRESS, 0L) > 0) {
             return Status.IN_PROGRESS;
         } else if (res.get(Status.DONE) == countOfStatuses) {
             return Status.DONE;
@@ -111,15 +111,12 @@ public class ManagerImpl implements Manager {
             subTasks.add(getSubTaskById(idSubTask));
         }
         int countInProgress = 0;
-        int countNew = 0;
         int countDone = 0;
         for (SubTask subTask : subTasks) {
             if (subTask.getStatus() == Status.IN_PROGRESS) {
                 countInProgress++;
             } else if (subTask.getStatus() == Status.DONE) {
                 countDone++;
-            } else if (subTask.getStatus() == Status.NEW) {
-                countNew++;
             }
         }
         if (countInProgress > 0) {

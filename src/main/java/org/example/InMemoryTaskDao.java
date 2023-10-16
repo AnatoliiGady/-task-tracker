@@ -34,7 +34,7 @@ public class InMemoryTaskDao implements TaskDao {
 
     @Override
     public int add(SubTask subTask) {
-        subTasks.put(idGeneratorSubTask++, subTask);
+        subTasks.put(idGeneratorSubTask, subTask);
         subTask.setId(idGeneratorSubTask);
         idGeneratorSubTask++;
         return subTask.getId();

@@ -30,5 +30,4 @@ public interface TaskDao {
 
     void update(SubTask subTask);
 
-    Status getEpicStatusById(int id);
 }
