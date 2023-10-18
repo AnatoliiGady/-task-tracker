@@ -1,6 +1,7 @@
 package org.example.manager;
 
 import org.example.InMemoryTaskDao;
+import org.example.UpdateEpicDto;
 import org.example.status.Status;
 import org.example.task.Epic;
 import org.example.task.SubTask;
@@ -33,6 +34,8 @@ public class ManagerImpl implements Manager {
     public int add(SubTask subTask) {
         subTask.setStatus(Status.NEW);
         int id = taskDao.add(subTask);
+        Epic epicById = getEpicById(subTask.getEpicId());
+        epicById.addSubTaskId(id);
         return id;
     }
 
@@ -44,12 +47,21 @@ public class ManagerImpl implements Manager {
 
     @Override
     public boolean removeEpicById(int id) {
+        Epic epic = getEpicById(id);
+        List<Integer> idSubtasks = epic.getIdSubTasks();
+        for (Integer idSubTask : idSubtasks) {
+            taskDao.removeSubTaskById(idSubTask);
+        }
         taskDao.removeEpicById(id);
         return true;
     }
 
     @Override
     public boolean removeSubTaskById(int id) {
+        SubTask subTask = getSubTaskById(id);
+        Epic epic = getEpicById(subTask.getEpicId());
+        List<Integer> idSubTasks = epic.getIdSubTasks();
+        idSubTasks.remove(Integer.valueOf(id));
         taskDao.removeSubTaskById(id);
         return true;
     }
@@ -75,7 +87,11 @@ public class ManagerImpl implements Manager {
     }
 
     @Override
-    public void update(Epic epic) {
+    public void update(UpdateEpicDto updateEpicDto) {
+        Epic epic = new Epic();
+        epic.setId(updateEpicDto.getId());
+        epic.setDescription(updateEpicDto.getDescription());
+        epic.setTitle(updateEpicDto.getTitle());
         taskDao.update(epic);
     }
 
