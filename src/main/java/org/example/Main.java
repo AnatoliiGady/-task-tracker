@@ -22,6 +22,11 @@ public class Main {
         manager.add(subTask2);
         subTask2.setStatus(Status.DONE);
 
+        SubTask subTask3 = new SubTask();
+        subTask3.setTitle("Найти дизайнера");
+        manager.add(subTask3);
+        subTask3.setStatus(Status.IN_PROGRESS);
+
 
         Epic epic1 = new Epic();
         epic1.setTitle("Переезд");
@@ -29,6 +34,11 @@ public class Main {
         manager.add(epic1);
         epic1.addSubTaskId(0);
         epic1.addSubTaskId(1);
+
+        Epic epic2 = new Epic();
+        epic2.setTitle("Начерить проект дома");
+        epic2.setDescription("Заказать чертеж");
+        manager.add(epic2);
 
         System.out.println("В задаче под номером " + epic1.getId() + " находятся подзадачи под номером: " + epic1.getIdSubTasks().get(0)
                 + ", " + epic1.getIdSubTasks().get(1));
