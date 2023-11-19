@@ -1,6 +1,8 @@
 package org.example.manager;
 
 import org.example.UpdateEpicDto;
+import org.example.UpdateSubTaskDto;
+import org.example.UpdateTaskDto;
 import org.example.status.Status;
 import org.example.task.Epic;
 import org.example.task.SubTask;
@@ -25,10 +27,10 @@ public interface Manager {
 
     SubTask getSubTaskById(int id);
 
-    void update(Task task);
+    void update(UpdateTaskDto updateTaskDto);
 
     void update(UpdateEpicDto updateEpicDto);
 
-    void update(SubTask subTask);
+    void update(UpdateSubTaskDto updateSubTaskDto);
     Status getEpicStatusById(int id);
 }
