@@ -1,6 +1,7 @@
 package org.example.task;
 
 
+import org.example.manager.ManagerImpl;
 import org.example.status.Status;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class Epic extends AbstractTask {
 
     public List<Integer> getIdSubTasks() {
         return idSubTasks;
+    }
+
+    @Override
+    public void setStatus(Status status) {
     }
 
     @Override
