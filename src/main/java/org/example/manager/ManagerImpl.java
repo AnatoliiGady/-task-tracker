@@ -2,6 +2,8 @@ package org.example.manager;
 
 import org.example.InMemoryTaskDao;
 import org.example.UpdateEpicDto;
+import org.example.UpdateSubTaskDto;
+import org.example.UpdateTaskDto;
 import org.example.status.Status;
 import org.example.task.Epic;
 import org.example.task.SubTask;
@@ -82,7 +84,11 @@ public class ManagerImpl implements Manager {
     }
 
     @Override
-    public void update(Task task) {
+    public void update(UpdateTaskDto updateTaskDto) {
+        Task task = new Task();
+        task.setId(updateTaskDto.getId());
+        task.setDescription(updateTaskDto.getDescription());
+        task.setTitle(updateTaskDto.getTitle());
         taskDao.update(task);
     }
 
@@ -96,7 +102,11 @@ public class ManagerImpl implements Manager {
     }
 
     @Override
-    public void update(SubTask subTask) {
+    public void update(UpdateSubTaskDto updateSubTaskDto) {
+        SubTask subTask = new SubTask();
+        subTask.setId(updateSubTaskDto.getId());
+        subTask.setDescription(updateSubTaskDto.getDescription());
+        subTask.setTitle(updateSubTaskDto.getTitle());
         taskDao.update(subTask);
     }
 
@@ -110,13 +120,12 @@ public class ManagerImpl implements Manager {
 
         if (res.getOrDefault(Status.IN_PROGRESS, 0L) > 0) {
             return Status.IN_PROGRESS;
-        } else if (res.get(Status.DONE) == countOfStatuses) {
+        } else if (res.getOrDefault(Status.DONE, 0L) == countOfStatuses) {
             return Status.DONE;
         } else {
             return Status.NEW;
         }
     }
-
 
     @Override
     public Status getEpicStatusById(int id) {
