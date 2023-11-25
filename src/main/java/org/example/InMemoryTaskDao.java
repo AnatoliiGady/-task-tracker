@@ -88,42 +88,6 @@ public class InMemoryTaskDao implements TaskDao {
         subTasks.put(subTask.getId(), subTask);
     }
 
-    public Map<Integer, Task> getTasks() {
-        return tasks;
-    }
-
-    public Map<Integer, Epic> getEpics() {
-        return epics;
-    }
-
-    public Map<Integer, SubTask> getSubTasks() {
-        return subTasks;
-    }
-
-    public int getIdGeneratorTask() {
-        return idGeneratorTask;
-    }
-
-    public void setIdGeneratorTask(int idGeneratorTask) {
-        this.idGeneratorTask = idGeneratorTask;
-    }
-
-    public int getIdGeneratorEpic() {
-        return idGeneratorEpic;
-    }
-
-    public void setIdGeneratorEpic(int idGeneratorEpic) {
-        this.idGeneratorEpic = idGeneratorEpic;
-    }
-
-    public int getIdGeneratorSubTask() {
-        return idGeneratorSubTask;
-    }
-
-    public void setIdGeneratorSubTask(int idGeneratorSubTask) {
-        this.idGeneratorSubTask = idGeneratorSubTask;
-    }
-
     @Override
     public String toString() {
         return "InMemoryTaskDao{"
