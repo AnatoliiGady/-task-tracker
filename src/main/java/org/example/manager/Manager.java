@@ -1,19 +1,17 @@
 package org.example.manager;
 
-import org.example.UpdateEpicDto;
-import org.example.UpdateSubTaskDto;
-import org.example.UpdateTaskDto;
+import org.example.dto.*;
 import org.example.status.Status;
 import org.example.task.Epic;
 import org.example.task.SubTask;
 import org.example.task.Task;
 
 public interface Manager {
-    int add(Task task);
+    int add(TaskDto taskDto);
 
-    int add(Epic epic);
+    int add(EpicDto epicDto);
 
-    int add(SubTask subTask);
+    int add(SubTaskDto subTaskDto);
 
     boolean removeTaskById(int id);
 
@@ -27,10 +25,10 @@ public interface Manager {
 
     SubTask getSubTaskById(int id);
 
-    void update(UpdateTaskDto updateTaskDto);
+    void update(TaskDto taskDto);
 
-    void update(UpdateEpicDto updateEpicDto);
+    void update(EpicDto epicDto);
 
-    void update(UpdateSubTaskDto updateSubTaskDto);
+    void update(SubTaskDto subTaskDto);
     Status getEpicStatusById(int id);
 }

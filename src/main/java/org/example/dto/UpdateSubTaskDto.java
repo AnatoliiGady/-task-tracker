@@ -1,6 +1,6 @@
-package org.example;
+package org.example.dto;
 
-public class UpdateEpicDto {
+public class UpdateSubTaskDto {
     private Integer id;
     private String title;
     private String description;
