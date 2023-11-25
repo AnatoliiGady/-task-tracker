@@ -129,24 +129,16 @@ public class ManagerImpl implements Manager {
 
     @Override
     public Status getEpicStatusById(int id) {
-        Epic epicById = taskDao.getEpicById(id);
-        List<Integer> idSubTasks = epicById.getIdSubTasks();
-        List<SubTask> subTasks = new ArrayList<>();
-        for (Integer idSubTask : idSubTasks) {
-            subTasks.add(getSubTaskById(idSubTask));
-        }
-        int countInProgress = 0;
-        int countDone = 0;
-        for (SubTask subTask : subTasks) {
-            if (subTask.getStatus() == Status.IN_PROGRESS) {
-                countInProgress++;
-            } else if (subTask.getStatus() == Status.DONE) {
-                countDone++;
-            }
-        }
-        if (countInProgress > 0) {
+        Map<Status, Long> res = getEpicById(id).getIdSubTasks().stream()
+                .map(taskDao::getSubTaskById)
+                .map(SubTask::getStatus)
+                .collect(Collectors.groupingBy(status -> status, Collectors.counting()));
+
+        int countOfStatuses = res.values().stream().mapToInt(Long::intValue).sum();
+
+        if (res.getOrDefault(Status.IN_PROGRESS, 0L) > 0) {
             return Status.IN_PROGRESS;
-        } else if (countDone == idSubTasks.size()) {
+        } else if (res.getOrDefault(Status.DONE, 0L) == countOfStatuses) {
             return Status.DONE;
         } else {
             return Status.NEW;
