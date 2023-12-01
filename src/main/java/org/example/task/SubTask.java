@@ -19,7 +19,7 @@ public class SubTask extends AbstractTask {
                 + ", title='" + getTitle() + '\''
                 + ", description='" + getDescription() + '\''
                 + ", status=" + getStatus()
-                + "epic=" + epicId
+                + ", epic=" + epicId
                 + '}';
     }
 }

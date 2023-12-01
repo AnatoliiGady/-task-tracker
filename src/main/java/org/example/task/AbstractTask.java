@@ -8,11 +8,11 @@ public abstract class AbstractTask {
     private String description;
     private Status status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

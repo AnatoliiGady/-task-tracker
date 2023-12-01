@@ -31,6 +31,7 @@ public class TaskConverter {
             setDescription(subTask.getDescription());
             setTitle(subTask.getTitle());
             setStatus(subTask.getStatus());
+            setEpicId(subTask.getEpicId());
         }};
     }
 }

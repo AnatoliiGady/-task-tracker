@@ -64,12 +64,12 @@ public class InMemoryTaskDao implements TaskDao {
     }
 
     @Override
-    public Epic getEpicById(int id) {
+    public Epic getEpicById(Integer id) {
         return epics.get(id);
     }
 
     @Override
-    public SubTask getSubTaskById(int id) {
+    public SubTask getSubTaskById(Integer id) {
         return subTasks.get(id);
     }
 

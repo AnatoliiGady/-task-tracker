@@ -19,9 +19,9 @@ public interface Manager {
 
     boolean removeSubTaskById(int id);
 
-    Task getTaskById(int id);
+    Task getTaskById(Integer id);
 
-    Epic getEpicById(int id);
+    Epic getEpicById(Integer id);
 
     SubTask getSubTaskById(int id);
 
