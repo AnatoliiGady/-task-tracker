@@ -89,7 +89,7 @@ public class ManagerImpl implements Manager {
     }
 
     @Override
-    public SubTask getSubTaskById(int id) {
+    public SubTask getSubTaskById(Integer id) {
         return taskDao.getSubTaskById(id);
     }
 

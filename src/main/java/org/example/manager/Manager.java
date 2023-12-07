@@ -23,7 +23,7 @@ public interface Manager {
 
     Epic getEpicById(Integer id);
 
-    SubTask getSubTaskById(int id);
+    SubTask getSubTaskById(Integer id);
 
     void update(TaskDto taskDto);
 
