@@ -42,9 +42,10 @@ abstract class ManagerTest {
     }
 
     @Test
-    void addSubTasks() {
+    void addSubTask() {
         EpicDto epicDtoForAdd = new EpicDto();
         int addedEpicId = manager.add(epicDtoForAdd);
+        Epic addedEpicById = manager.getEpicById(addedEpicId);
 
         SubTaskDto subTaskDtoForAdd = new SubTaskDto();
         subTaskDtoForAdd.setDescription("Начать учить язык программирования Java");
@@ -55,7 +56,17 @@ abstract class ManagerTest {
 
         Assertions.assertEquals(subTaskDtoForAdd.getDescription(), addedSubTask.getDescription());
         Assertions.assertEquals(subTaskDtoForAdd.getTitle(), addedSubTask.getTitle());
+        for (Integer idSubTask : manager.getEpicById(addedEpicId).getIdSubTasks()) {
+            if (idSubTask == addedSubTaskId) {
+                System.out.println("Да");
+            } else {
+                System.out.println("Нет");
+            }
+        }
+        Assertions.assertEquals(addedSubTask.getId(), manager.getEpicById(addedEpicId).getIdSubTasks());
+        Assertions.assertEquals(addedEpicId, manager.getSubTaskById(addedSubTaskId).getEpicId());
     }
+
 
     @Test
     void removeTaskById() {
@@ -120,7 +131,7 @@ abstract class ManagerTest {
         subTaskDtoForAdd.setEpicId(addedEpicId);
         int addedSubTaskId = manager.add(subTaskDtoForAdd);
         SubTask addedSubTask = manager.getSubTaskById(addedSubTaskId);
-        addedSubTask.setStatus(Status.IN_PROGRESS);
+        addedSubTask.setStatus(Status.IN_PROGRESS); // надо заменить изменения статуса через менеджер
 
         SubTaskDto subTaskDtoForAdd1 = new SubTaskDto();
         subTaskDtoForAdd1.setDescription("Начать учить английский язык");
@@ -230,7 +241,7 @@ abstract class ManagerTest {
         Assertions.assertEquals(Status.NEW, addedSubTask1.getStatus());
         Assertions.assertEquals(Status.NEW, manager.getEpicStatusById(addedEpicId));
 
-        addedSubTask1.setStatus(Status.IN_PROGRESS);
+        addedSubTask1.setStatus(Status.IN_PROGRESS); // поменять!
 
         Assertions.assertEquals(Status.NEW, addedSubTask.getStatus());
         Assertions.assertEquals(Status.IN_PROGRESS, addedSubTask1.getStatus());
@@ -256,7 +267,7 @@ abstract class ManagerTest {
         Assertions.assertEquals(Status.NEW, addedSubTask1.getStatus());
         Assertions.assertEquals(Status.NEW, manager.getEpicStatusById(addedEpicId));
 
-        addedSubTask.setStatus(Status.DONE);
+        addedSubTask.setStatus(Status.DONE); // поменять!
         addedSubTask1.setStatus(Status.DONE);
 
         Assertions.assertEquals(Status.DONE, addedSubTask.getStatus());
@@ -320,7 +331,7 @@ abstract class ManagerTest {
         subTaskDtoForAdd.setEpicId(addedEpicId);
         int addedSubTaskId = manager.add(subTaskDtoForAdd);
         SubTask addedSubTask = manager.getSubTaskById(addedSubTaskId);
-        addedSubTask.setStatus(Status.IN_PROGRESS);
+        addedSubTask.setStatus(Status.IN_PROGRESS); //
 
         Assertions.assertEquals(Status.IN_PROGRESS, addedSubTask.getStatus());
         Assertions.assertEquals(Status.IN_PROGRESS, manager.getEpicStatusById(addedEpicId));
@@ -334,5 +345,6 @@ abstract class ManagerTest {
 
         Assertions.assertEquals(Status.DONE, manager.getSubTaskById(addedSubTaskId).getStatus());
         Assertions.assertEquals(Status.DONE, manager.getEpicStatusById(addedEpicId));
+        Assertions.assertEquals(subTaskDtoForUpdate.getTitle(), manager.getSubTaskById(addedSubTaskId).getTitle());
     }
 }
