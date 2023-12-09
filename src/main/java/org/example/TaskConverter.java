@@ -16,21 +16,22 @@ public class TaskConverter {
             setStatus(taskDto.getStatus());
         }};
     }
-    public static Epic convertToEpic(EpicDto epic) {
+    public static Epic convertToEpic(EpicDto epicDto) {
         return new Epic() {{
-            setId(epic.getId());
-            setDescription(epic.getDescription());
-            setTitle(epic.getTitle());
-            setStatus(epic.getStatus());
+            setId(epicDto.getId());
+            setDescription(epicDto.getDescription());
+            setTitle(epicDto.getTitle());
+            setStatus(epicDto.getStatus());
         }};
     }
 
-    public static SubTask convertToSubTask(SubTaskDto subTask) {
+    public static SubTask convertToSubTask(SubTaskDto subTaskDto) {
         return new SubTask() {{
-            setId(subTask.getId());
-            setDescription(subTask.getDescription());
-            setTitle(subTask.getTitle());
-            setStatus(subTask.getStatus());
+            setId(subTaskDto.getId());
+            setDescription(subTaskDto.getDescription());
+            setTitle(subTaskDto.getTitle());
+            setStatus(subTaskDto.getStatus());
+            setEpicId(subTaskDto.getEpicId());
         }};
     }
 }

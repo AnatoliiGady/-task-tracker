@@ -7,6 +7,15 @@ public class SubTaskDto {
     private String title;
     private String description;
     private Status status;
+    private Integer epicId;
+
+    public void setEpicId(Integer epicId) {
+        this.epicId = epicId;
+    }
+
+    public Integer getEpicId() {
+        return epicId;
+    }
 
     public Integer getId() {
         return id;

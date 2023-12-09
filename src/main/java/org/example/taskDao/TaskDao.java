@@ -20,9 +20,9 @@ public interface TaskDao {
 
     Task getTaskById(int id);
 
-    Epic getEpicById(int id);
+    Epic getEpicById(Integer id);
 
-    SubTask getSubTaskById(int id);
+    SubTask getSubTaskById(Integer id);
 
     void update(Task task);
 

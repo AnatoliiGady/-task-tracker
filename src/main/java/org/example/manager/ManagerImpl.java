@@ -36,13 +36,17 @@ public class ManagerImpl implements Manager {
         SubTask subTask = TaskConverter.convertToSubTask(subTaskDto);
         subTask.setStatus(Status.NEW);
         int id = taskDao.add(subTask);
-        Epic epicById = getEpicById(subTask.getEpicId());
+        Epic epicById = taskDao.getEpicById(subTask.getEpicId());
         epicById.addSubTaskId(id);
         return id;
     }
 
     @Override
     public boolean removeTaskById(int id) {
+        Task task = taskDao.getTaskById(id);
+        if (task == null) {
+            return false;
+        }
         taskDao.removeTaskById(id);
         return true;
     }
@@ -50,6 +54,9 @@ public class ManagerImpl implements Manager {
     @Override
     public boolean removeEpicById(int id) {
         Epic epic = getEpicById(id);
+        if (epic == null) {
+            return false;
+        }
         List<Integer> idSubtasks = epic.getIdSubTasks();
         for (Integer idSubTask : idSubtasks) {
             taskDao.removeSubTaskById(idSubTask);
@@ -61,6 +68,9 @@ public class ManagerImpl implements Manager {
     @Override
     public boolean removeSubTaskById(int id) {
         SubTask subTask = getSubTaskById(id);
+        if (subTask == null) {
+            return false;
+        }
         Epic epic = getEpicById(subTask.getEpicId());
         List<Integer> idSubTasks = epic.getIdSubTasks();
         idSubTasks.remove(Integer.valueOf(id));
@@ -69,17 +79,17 @@ public class ManagerImpl implements Manager {
     }
 
     @Override
-    public Task getTaskById(int id) {
+    public Task getTaskById(Integer id) {
         return taskDao.getTaskById(id);
     }
 
     @Override
-    public Epic getEpicById(int id) {
+    public Epic getEpicById(Integer id) {
         return taskDao.getEpicById(id);
     }
 
     @Override
-    public SubTask getSubTaskById(int id) {
+    public SubTask getSubTaskById(Integer id) {
         return taskDao.getSubTaskById(id);
     }
 
